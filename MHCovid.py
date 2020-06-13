@@ -17,25 +17,16 @@ class MHCovid:
     print('MHCovid at your service!')
 
   def generateModel(self, path=None):
-    # create the base pre-trained model
     base_model = tf.keras.applications.VGG19(weights='imagenet', include_top=False, input_shape=(224, 224, 3))
-    # add a global spatial average pooling layer
     x = base_model.output
     x = tf.keras.layers.AveragePooling2D()(x)
-    # let's add a fully-connected layer
     x = tf.keras.layers.Flatten()(x)
     x = tf.keras.layers.Dense(512, activation='relu')(x)
-    # and a logistic layer -- let's say we have 200 classes
     predictions = tf.keras.layers.Dense(1, activation='sigmoid')(x)
-    # this is the model we will train
     model = tf.keras.Model(inputs=base_model.input, outputs=predictions)
     #model.summary()
-    # first: train only the top layers (which were randomly initialized)
-    # i.e. freeze all convolutional InceptionV3 layers
     for layer in base_model.layers:
         layer.trainable = False
-    #print('here')
-    # compile the model (should be done *after* setting layers to non-trainable)
     model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
     return model
   
@@ -64,7 +55,6 @@ class MHCovid:
     plt.show()
   
   def predict(self, model, imagefile, show=True):
-    ##  Raw image assumption...
     image = cv2.resize(cv2.cvtColor(cv2.imread(imagefile), cv2.COLOR_BGR2RGB), (224, 224))/255.
     output = round(float(model(np.array([image], dtype=np.float32))[0][0]), 3)
     plt.figure(figsize=(7, 7))
