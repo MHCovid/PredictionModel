@@ -19,7 +19,11 @@ have achieved acceptable performance. So we did not train them. Below is an imag
 <img src="nn.png" width="1000" class="center" />
 
 ## How To Use
-For the prediction, everything is done using MHCovid class. As simple as the below code:
+### Website
+As mentioned in the introduction, you can do the prediction job using our [MHCOVID website](http://www.mhcovid.com)
+
+### Code
+In the code level, for the sake of simple usage, everything is done using MHCovid class. As simple as the below code:
 
 ```python
 from MHCovid import MHCovid
