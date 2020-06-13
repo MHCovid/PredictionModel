@@ -8,7 +8,7 @@ variance. However, for a deep neural network to get acceptable performance, we u
 amounts of datasets. Otherwise, there may be issues like overfitting. To solve this problem, we
 use the beautiful idea of transfer learning. Training a deep neural network with the idea of transfer
 learning on 2 available datasets on the web, we achieved a COVID-19 detection accuracy of 98% on
-about 1000 test samples
+about 1000 test samples. A web application is available on [mhcovid.com](www.mhcovid.com)
 
 ## How It's Working
 For the implementation, we use a pre-trained VGG-19 network. We keep its convolutional layers and discard the rest.
